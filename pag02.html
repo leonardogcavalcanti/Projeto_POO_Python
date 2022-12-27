@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Página 02</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.1/styles/a11y-dark.min.css">
+</head>
+<body>
+
+    <header class="page">
+        Página 02
+    </header>
+
+    
+    <main>
+        <h1><mark>Método (Construtor e Destrutor)</mark></h1>
+
+            <div>
+                <p>Os métodos podem ser construtores ou destrutores. O método construtor, cria o estado inicial de um objeto com um conjunto mínimo de parâmetros necessário para existir. O método __init__ (abreviação da palavra em inglês para “inicialização”) é um método especial, invocado quando um objeto é instanciado. O método __str__ é um método especial, como __init__, porém ele é usado para retornar uma representação de string de um objeto, ou seja, ao exibir um objeto com print, será invocado o método __str__ com as informações que foram parametrizadas.</p>
+            </div> 
+            <div>
+                <p>O método destrutor ( __del__ ) é chamado sempre que um objeto não é mais utilizado, serve para limpar a memória do python, para não consumir espaço desnecessário, deixando o programa mais "leve".  Existem <a href="https://docs.python.org/3/reference/datamodel.html#specialnames" target="_blank"  rel="external" class="externo">outros métodos.</a></p>
+            </div>
+
+            <aside>
+                <pre><code class="python">
+                
+                
+                
+                    
+                    
+                    <div>
+                        # Métodos
+
+                        """Declarando a Classe Veículo"""
+                        class Veiculo:
+                            """Método de inicialização"""
+                            def __init__(self, cor, placa):
+                                self.cor = cor
+                                self.placa = placa
+                            """Método de string"""
+                            def __str__(self):
+                                return '({}, {}, {})'.format(type(self).__name__, self.cor, self.placa)
+                            """Método desconstrutor"""
+                            def __del__(self):
+                                print("O objeto foi removido da memória")
+
+                    </div>
+                    
+                
+                
+                
+                
+                
+                </code></pre>
+            </aside>
+
+            <h1><mark>Sobrecarga</mark></h1>
+
+            <p>A Sobrecarga de métodos (overload) usa o número ou tipo de argumento para distinguir entre funções ou operadores com nomes idênticos. Ademais, é um conceito do polimorfismo que consiste basicamente em criar variações de um mesmo método, ou seja, a criação de dois ou mais métodos com nomes totalmente iguais em uma classe. A Sobrecarga permite que utilizemos o mesmo nome em mais de um método, contanto que suas listas de argumentos sejam diferentes.</p>
+
+            <h1><mark>Herança</mark></h1>
+
+            <p>A herança nos permite definir várias subclasses a partir de uma classe já definida. Você pode pensar nisso como o conceito de herança genética da vida real. As crianças (subclasse) são o resultado da herança entre dois pais (superclasses). Eles herdam todas as características físicas (atributos) e alguns comportamentos (métodos) comuns.</p>
+
+            <aside>
+                <pre><code class="python">
+                    <div>
+                        # Herança
+
+                        """ Declarando a Classe Veículo """
+                        class Veiculo:
+                            def __init__(self, cor, placa):
+                                self.cor = cor
+                                self.placa = placa
+                            def __str__(self):
+                                return '({}, {}, {})'.format(type(self).__name__, self.cor, self.placa)
+                        """Subclasse de veículo"""
+                        class Motocicleta(Veiculo):
+                            pass
+                        """Subclasse de veículo"""
+                        class CarroDePasseio(Veiculo):
+                            pass
+                        """Subclasse de veículo"""
+                        class UtilitarioEsportivo(Veiculo):
+                            pass
+                        """Subclasse de veículo"""
+                        class Caminhonete(Veiculo):
+                            pass
+                        """Subclasse de veículo"""
+                        class Caminhao(Veiculo):
+                            pass
+                        # Método (Construtor)
+                        # Declarando a classe Atendimento
+                        class Atendimento:
+                            def __init__(self, servico, veiculo):
+                                self.servico = servico
+                                self.veiculo = veiculo
+                            def __str__(self):
+                                return '{}: {}'.format(self.servico, self.veiculo)
+
+                        # Método (Construtor)
+
+                        # Declarando a Classe Lava jato
+                        class Lavajato:
+                            def __init__(self):
+                                self.atendimentos = []
+                            def atender(self, servico, veiculo):
+                                a = Atendimento(servico, veiculo)
+                                self.atendimentos.append(a)
+                                preco = 30.0
+                                print('Ow, tem cliente pra atender! {}. Vai custar R$ {}, blz?'.format(a, preco))
+                            def executar_proximo_servico(self):
+                                if len(self.atendimentos) == 0:
+                                    print('Já atendemos todo mundo. Só diboas...')
+                                else:
+                                    proximo = self.atendimentos[0]
+                                    self.atendimentos.remove(proximo)
+                                    if len(self.atendimentos) == 0:
+                                        print('{} concluído. Traz uma coca aê pra nóis.'.format(proximo))
+                                    else:
+                                        print('{} concluído. Faltam(m) {} atendimentos.'.format(proximo, len(self.atendimentos)))
+
+                        # Programa Principal (Teste)
+
+                        l1 = Lavajato()
+                        m1 = Motocicleta('Branca', 'ABC-1234')
+                        c1 = CarroDePasseio('Preta', 'ABC-4321')
+                        u1 = UtilitarioEsportivo('Prata', 'ABC-2134')
+                        c2 = Caminhonete('Preta', 'ABC-3214')
+                        c3 = Caminhao('Verde', 'ABC-3124')
+                        l1.atender('Lavar', m1)
+                        l1.atender('Lavar', c1)
+                        l1.executar_proximo_servico()
+                        l1.executar_proximo_servico()
+                        l1.atender('Lavar e encerar', u1)
+                        l1.atender('Lavar', c2)
+                        l1.executar_proximo_servico()
+                        l1.executar_proximo_servico()
+                        l1.atender('Lavar completo', c3)
+                        l1.executar_proximo_servico()
+                        l1.executar_proximo_servico()
+                    </div>
+                </code></pre>
+            </aside>
+
+
+        <footer>
+            <p>Desenvolvido por  <a href="https://www.linkedin.com/in/leonardo-cavalcanti-65981aa3/" target="_blank" rel="external">Leonardo Cavalcanti</a></p>
+        </footer>
+    </main>
+    <div class="next">
+        <p style="text-align:right;"><a href="index.html"><img src="imagens/voltar.png"></a></p>
+        <p style="text-align: right;"><a href="pag03.html"><img src="imagens/ir.png"></a></p>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.2/highlight.min.js"></script>
+    <script>hljs.highlightAll();</script>
+</body>
+</html>

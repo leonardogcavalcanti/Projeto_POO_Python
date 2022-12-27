@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Página 03</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.1/styles/a11y-dark.min.css">
+</head>
+<body>
+    <header class="page">
+        Página 03
+    </header>
+    <main>
+
+        <h1><mark>Encapsulamento</mark></h1>
+
+        <p>Encapsulamento é o processo no qual protegemos a integridade interna dos dados em uma classe. Em Python não tem declaração privada, então existem métodos chamadas mangling, que usando _nome(um underline antes do nome) , __nome(dois underline) ou __nome_ (dois underline antes do nome e um depois do nome) para informar o nível de privacidade dos dados. Há métodos especiais chamados getters e setters que nos permitem acessar atributos e métodos únicos. Imaginemos uma classe humana que tem um atributo único chamado _altura. Você só pode modificar este atributo dentro de certas restrições (é quase impossível ser superior a 3 metros).</p>
+
+        <h1><mark>Polimorfismo</mark></h1>
+
+        <p>O polimorfismo nos permite modificar ligeiramente os métodos e atributos das subclasses, que são previamente definidas na superclasse. O significado literal é “muitas formas“. Isso porque construímos métodos com o mesmo nome, mas com funcionalidades diferentes.</p>
+
+        <aside>
+            <pre><code>
+                <div>
+                        # Polimorfismo
+
+                        """Declarando a Classe Conta"""
+                        class Conta:
+                            """O parâmetro saldo é predefinido como zero"""
+                            def __init__(self, cliente, numero, saldo = 0): 
+                                self.saldo = saldo
+                                self.cliente = cliente
+                                self.numero = numero
+                        
+                            def resumo(self):
+                                print("Titular: ", self.cliente.nome)
+                                print("C/C: Número = {} Saldo: R$ {:.2f}"  .format(self.numero, self.saldo))
+                        
+                            def saque(self, valor):
+                                if self.saldo >= valor:
+                                    self.saldo -= valor
+                                else:
+                                    print("Saldo insuficiente, solicite Cheque Especial.")
+                        
+                            def credito(self, valor):
+                                self.saldo += valor
+                                
+
+                        """Declarando a Classe Cliente"""
+                        class Cliente:
+                            def __init__(self, nome, telefone):
+                                self.nome = nome
+                                self.telefone = telefone
+                        
+                            def imprime_perfil(self):
+                                print(self.nome, "(", self.telefone, ")")
+
+                        # Importando Classe Conta e Classe Cliente
+
+                        from conta import Conta
+                        from cliente import Cliente
+                        
+                        # Criando Conta Especial Polimorfa de Conta
+
+                        """Declarando a Classe ContaEspecial"""
+                        class ContaEspecial(Conta): """Herdando da classe Conta"""
+                            def __init__(self, cliente, numero, saldo = 0, limite = 0):
+                                """Chamando o contrutor da superclasse na subclasse"""
+                                Conta.__init__(self, cliente, numero, saldo)
+                                """Incluindo o parâmetro limite (Herança)"""
+                                self.limite = limite
+                            """O saque vai se comportar de forma diferente (Polimorfismo)"""
+                            def saque(self, valor):
+                                if (self.saldo + self.limite >= valor):
+                                    self.saldo -= valor
+                                else:
+                                    print("Valor acima do Cheque Especial disponível")
+                        
+                            def resumo(self):
+                                Conta.resumo(self)
+                                print("Limite do Cheque Especial: ", self.limite)
+                        
+                        # Programa Principal (Teste)
+                        
+                        francisco = Cliente("francisco", "83-342345")
+                        josefa = Cliente("josefa", "83-3423455")
+                        c1 = Conta(francisco, 1, 1000)
+                        c2 = ContaEspecial(josefa, 2, 1000, 200)
+                        print("\n Conta 1")
+                        c1.resumo()
+                        print("Solicitando saque de 1100 reais. Loading...")
+                        c1.saque(1100)
+                        c1.resumo()
+                        print("\n Conta 2")
+                        c2.resumo()
+                        print("Solicitando saque de 1100 reais. Loading...")
+                        c2.saque(1500)
+                        c2.resumo()
+                </div>
+            </code></pre>
+        </aside>
+
+        <h1><mark>Classes Abstratas</mark></h1>
+    
+        <div>
+            <p>significa a habilidade de definir e usar estruturas ou operações complicadas de forma a permitir que muitos dos detalhes sejam ignorados. Uma abstração é uma visão ou representação de uma entidade que inclui apenas os atributos mais significativos.</p>
+        </div>
+        <div>
+            <p>De um modo geral, a abstração permite que alguém colete exemplares de entidades em grupos nos quais seus atributos comuns não precisam ser considerados. Por exemplo, suponha que definíssemos aves como criaturas com os seguintes atributos: duas asas, duas pernas, um rabo e penas. Então, se dissermos que um corvo é uma ave, uma descrição de um corvo não precisa incluir esses atributos.</p>
+        </div>
+
+        <div>
+            <p>O mesmo ocorre para os calopsitas, pardais e águias. Esses atributos comuns nas descrições de espécies específicas de pássaros podem ser abstraídos. Dentro de uma espécie em particular, apenas os atributos que a distinguem precisam ser considerados, resultando em uma simplificação significativa das descrições.</p>
+        </div>
+
+        <div>
+        <p>
+            Uma visão menos abstrata de uma espécie, aquela de um pássaro, pode ser considerada quando for necessário ver um alto nível de detalhes.
+            No mundo das linguagens de programação, a abstração é uma arma contra a complexidade da programação; seu propósito é simplificar o processo de programação. É uma arma efetiva, pois permite que os programadores foquem em atributos essenciais, enquanto ignoram os subordinados. A linguagem de programação que suporta abstração é muito importante para a facilidade da escrita.
+        </p>
+        </div>
+        
+        
+
+        <h1><mark>Interfaces</mark></h1>
+        <p>Uma das metas do projeto orientado a objeto é facilitar a manutenção do programa. para que você possa mantê-lo funcionando quando outras partes do sistema forem alteradas, e também poder alterar o programa para satisfazer novas condições. Pode acontecer que, depois de implementar uma nova classe, você descubra uma implementação melhor. Se outras partes do programa estiverem usando a sua classe, mudar a interface pode ser trabalhoso e induzir a erros. No entanto, se projetou a interface cuidadosamente, pode alterar a implementação sem mudar a interface, e não será preciso mudar outras partes do programa.</p>
+
+        <footer>
+            <p>Desenvolvido por  <a href="https://www.linkedin.com/in/leonardo-cavalcanti-65981aa3/" target="_blank" rel="external">Leonardo Cavalcanti</a></p>
+        </footer>
+
+    </main>
+    <div class="next">
+
+        <p style="text-align:right;"><a href="pag02.html"><img src="imagens/voltar.png"></a></p>
+        
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.2/highlight.min.js"></script>
+    <script>hljs.highlightAll();</script>
+</body>
+</html>
