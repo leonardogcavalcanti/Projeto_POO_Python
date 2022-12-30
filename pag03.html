@@ -16,20 +16,25 @@
 
         <h1><mark>Encapsulamento</mark></h1>
 
-        <p>Encapsulamento é o processo no qual protegemos a integridade interna dos dados em uma classe. Em Python não tem declaração privada, então existem métodos chamadas mangling, que usando _nome(um underline antes do nome) , __nome(dois underline) ou __nome_ (dois underline antes do nome e um depois do nome) para informar o nível de privacidade dos dados. Há métodos especiais chamados getters e setters que nos permitem acessar atributos e métodos únicos. Imaginemos uma classe humana que tem um atributo único chamado _altura. Você só pode modificar este atributo dentro de certas restrições (é quase impossível ser superior a 3 metros).</p>
+        <p>Encapsulamento é o processo no qual protegemos a integridade interna dos dados em uma classe (Ex.: Carro - Não podemos acelerar um carro no pedal de freio), ou seja, todos os métodos ficam encapsulados (protegidos) dentro das suas devidas classes, separando o freio apenas para freiar e o acelerador apenas para acelerar, por exemplo. Em Python não tem declaração privada, então existem métodos chamadas mangling, que usando _nome(um underline antes do nome) , __nome(dois underline) ou __nome_ (dois underline antes do nome e um depois do nome) para informar o nível de privacidade dos dados. Há métodos especiais chamados getters e setters que nos permitem acessar atributos e métodos únicos. Imaginemos uma classe humana que tem um atributo único chamado _altura. Você só pode modificar este atributo dentro de certas restrições (é quase impossível ser superior a 3 metros).</p>
 
         <h1><mark>Polimorfismo</mark></h1>
 
-        <p>O polimorfismo nos permite modificar ligeiramente os métodos e atributos das subclasses, que são previamente definidas na superclasse. O significado literal é “muitas formas“. Isso porque construímos métodos com o mesmo nome, mas com funcionalidades diferentes.</p>
+        <p>O polimorfismo nos permite modificar ligeiramente os métodos e atributos das subclasses, que são previamente definidas na superclasse. O significado literal é “muitas formas“. Isso porque construímos métodos com o mesmo nome, mas com funcionalidades diferentes. No exemplo abaixo, a <mark class="mark2">def saque</mark> da <mark class="mark3">class Conta</mark> irá se comportar de uma forma diferente da <mark class="mark2">def saque</mark> da <mark class="mark4">class ContaEspecial</mark>, ambas tem o mesmo nome porém com comportamentos distintos.</p>
 
         <aside>
             <pre><code>
                 <div>
                         # Polimorfismo
 
-                        """Declarando a Classe Conta"""
+                        """
+                        Declarando a Classe Conta
+                        """
                         class Conta:
-                            """O parâmetro saldo é predefinido como zero"""
+
+                            """
+                            O parâmetro saldo é predefinido como zero
+                            """
                             def __init__(self, cliente, numero, saldo = 0): 
                                 self.saldo = saldo
                                 self.cliente = cliente
@@ -49,8 +54,11 @@
                                 self.saldo += valor
                                 
 
-                        """Declarando a Classe Cliente"""
+                        """
+                        Declarando a Classe Cliente
+                        """
                         class Cliente:
+
                             def __init__(self, nome, telefone):
                                 self.nome = nome
                                 self.telefone = telefone
@@ -58,21 +66,34 @@
                             def imprime_perfil(self):
                                 print(self.nome, "(", self.telefone, ")")
 
-                        # Importando Classe Conta e Classe Cliente
+                        """
+                        Importando Classe Conta e Classe Cliente 
+                        """
 
                         from conta import Conta
                         from cliente import Cliente
                         
                         # Criando Conta Especial Polimorfa de Conta
 
-                        """Declarando a Classe ContaEspecial"""
-                        class ContaEspecial(Conta): """Herdando da classe Conta"""
+                        """
+                        Declarando a Classe ContaEspecial
+                        """
+                        class ContaEspecial(Conta):
+                            """
+                            Herdando da classe Conta
+                            """
                             def __init__(self, cliente, numero, saldo = 0, limite = 0):
-                                """Chamando o contrutor da superclasse na subclasse"""
+                                """
+                                Chamando o construtor da superclasse na subclasse
+                                """
                                 Conta.__init__(self, cliente, numero, saldo)
-                                """Incluindo o parâmetro limite (Herança)"""
+                                """
+                                Incluindo o parâmetro limite (Herança)
+                                """
                                 self.limite = limite
-                            """O saque vai se comportar de forma diferente (Polimorfismo)"""
+                            """
+                            O saque vai se comportar de forma diferente (Polimorfismo)
+                            """
                             def saque(self, valor):
                                 if (self.saldo + self.limite >= valor):
                                     self.saldo -= valor
@@ -108,6 +129,7 @@
         <div>
             <p>significa a habilidade de definir e usar estruturas ou operações complicadas de forma a permitir que muitos dos detalhes sejam ignorados. Uma abstração é uma visão ou representação de uma entidade que inclui apenas os atributos mais significativos.</p>
         </div>
+
         <div>
             <p>De um modo geral, a abstração permite que alguém colete exemplares de entidades em grupos nos quais seus atributos comuns não precisam ser considerados. Por exemplo, suponha que definíssemos aves como criaturas com os seguintes atributos: duas asas, duas pernas, um rabo e penas. Então, se dissermos que um corvo é uma ave, uma descrição de um corvo não precisa incluir esses atributos.</p>
         </div>
@@ -121,6 +143,12 @@
             Uma visão menos abstrata de uma espécie, aquela de um pássaro, pode ser considerada quando for necessário ver um alto nível de detalhes.
             No mundo das linguagens de programação, a abstração é uma arma contra a complexidade da programação; seu propósito é simplificar o processo de programação. É uma arma efetiva, pois permite que os programadores foquem em atributos essenciais, enquanto ignoram os subordinados. A linguagem de programação que suporta abstração é muito importante para a facilidade da escrita.
         </p>
+        </div>
+
+        <div>
+            <p>
+                Por padrão, o Python não possui implementação para classes abstratas. Para isso, utilizamos a biblioteca ABC (Abstract Base Class). Com ela, conseguimos implementar métodos e classes abstratas em nossos programas. Para importá-la, utilizamos o seguinte código no início do nosso arquivo: from abc import ABC, abstractmethod.
+            </p>
         </div>
         
         

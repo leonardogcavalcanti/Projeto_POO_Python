@@ -35,16 +35,31 @@
                     <div>
                         # Métodos
 
-                        """Declarando a Classe Veículo"""
+                        """
+                        Declarando a Classe Veículo
+                        """
                         class Veiculo:
-                            """Método de inicialização"""
-                            def __init__(self, cor, placa):
+                            """
+                            Método de inicialização __init__.
+                            Obs.: o parâmetro "self" serve para acessar o atributo da classe.
+                            """
+                            def __init__(self, cor, placa): 
+                                """ 
+                                "self.cor"(atributo cor da classe Veiculo.
+
+                                Apenas "cor" serve como variável do atributo "cor" da classe Veiculo.
+                                """
+                                
                                 self.cor = cor
                                 self.placa = placa
-                            """Método de string"""
+                            """
+                            Método de string
+                            """
                             def __str__(self):
                                 return '({}, {}, {})'.format(type(self).__name__, self.cor, self.placa)
-                            """Método desconstrutor"""
+                            """
+                            Método destrutor
+                            """
                             def __del__(self):
                                 print("O objeto foi removido da memória")
 
@@ -71,48 +86,76 @@
                     <div>
                         # Herança
 
-                        """ Declarando a Classe Veículo """
+                        """ 
+                        Declarando a Classe Veículo
+                        """
                         class Veiculo:
+
                             def __init__(self, cor, placa):
                                 self.cor = cor
                                 self.placa = placa
+
                             def __str__(self):
                                 return '({}, {}, {})'.format(type(self).__name__, self.cor, self.placa)
-                        """Subclasse de veículo"""
+                        """
+                        Subclasse de veículo
+                        """
                         class Motocicleta(Veiculo):
                             pass
-                        """Subclasse de veículo"""
+
+                        """
+                        Subclasse de veículo
+                        """
                         class CarroDePasseio(Veiculo):
                             pass
-                        """Subclasse de veículo"""
+
+                        """
+                        Subclasse de veículo
+                        """
                         class UtilitarioEsportivo(Veiculo):
                             pass
-                        """Subclasse de veículo"""
+
+                        """
+                        Subclasse de veículo
+                        """
                         class Caminhonete(Veiculo):
                             pass
-                        """Subclasse de veículo"""
+
+                        """
+                        Subclasse de veículo
+                        """
                         class Caminhao(Veiculo):
                             pass
-                        # Método (Construtor)
-                        # Declarando a classe Atendimento
+
+
+                        """ 
+                        Declarando a classe Atendimento
+                        """
                         class Atendimento:
+
                             def __init__(self, servico, veiculo):
                                 self.servico = servico
                                 self.veiculo = veiculo
+
                             def __str__(self):
                                 return '{}: {}'.format(self.servico, self.veiculo)
 
-                        # Método (Construtor)
 
-                        # Declarando a Classe Lava jato
+                        
+                        """
+                        Declarando a Classe Lava jato
+                        """        
                         class Lavajato:
+
                             def __init__(self):
                                 self.atendimentos = []
+
                             def atender(self, servico, veiculo):
                                 a = Atendimento(servico, veiculo)
                                 self.atendimentos.append(a)
                                 preco = 30.0
                                 print('Ow, tem cliente pra atender! {}. Vai custar R$ {}, blz?'.format(a, preco))
+
                             def executar_proximo_servico(self):
                                 if len(self.atendimentos) == 0:
                                     print('Já atendemos todo mundo. Só diboas...')
@@ -126,6 +169,9 @@
 
                         # Programa Principal (Teste)
 
+                        """
+                        Método Lavajato sendo executado
+                        """
                         l1 = Lavajato()
                         m1 = Motocicleta('Branca', 'ABC-1234')
                         c1 = CarroDePasseio('Preta', 'ABC-4321')
